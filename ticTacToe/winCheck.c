@@ -51,12 +51,12 @@ int main(void){
 	}
 
 	result=checkWin(grid);
-	printf("\nPlayer %d wins\n",result);
+	//printf("\nPlayer %d wins 0\n",result);
 
 	return 0;
 }
 
-int checkWin(int grid[3][3]){
+/*int checkWin(int grid[3][3]){
 	int i,j,n=3,prevVal,flag;
 	//for rows
 	for(i=0;i<3;++i){
@@ -134,8 +134,70 @@ int checkWin(int grid[3][3]){
 
 	return 0;
 }
+*/
 
+int checkWin(int grid[3][3]){
+	int i,j,flag,symbol;
+	//For row check
+	for(i=0;i<3;++i){
+		flag=0;
+		for(j=0;j<2;++j){
+			if(grid[i][j]!=0){
+				symbol=grid[i][j];
+				if(grid[i][j]!=grid[i][j+1]){
+					flag=1;
+				}
+			}
+		}
+		if(flag==0){
+			printf("Player %d wins 1",symbol);
+			break;
+		}
+	}
+	//for column check
+	if(flag){
+		printf("\nChecking columns");	
+		for(i=0;i<3;++i){
+			flag=0;
+			for(j=0;j<2;++j){
+				if(grid[j][i]!=0){
+					symbol=grid[j][i];
+					if(grid[j][i]!=grid[j+1][i]){
+						flag=1;
+					}
+				}
+			}
+			if(flag==0){
+				printf("Player %d wins 2",symbol);
+				break;
+			}
+		}
+		if(flag){
+			flag=0;
+			for(i=0;i<2;++i){
+				symbol=grid[i][j];
+				if(grid[i][i]!=grid[i+1][i+1])
+					flag=1;
+			}
+			if(flag==0){
+				printf("Player %d wins 3",symbol);
+			}
+		}
+		if(flag){
+			flag=0;
+			for(i=0,j=2;i<2,j>0;++i,--j){
+				symbol=grid[i][j];
+				if(grid[i][j]!=grid[i+1][j-1])
+					flag=1;
+			}
+			if(flag==0){
+				printf("Player %d wins 4",symbol);
+			}
+		}
+	
+	}
 
+}
 
 void readMatrix(char fname[],int pa[3][3])
 {
